@@ -23,15 +23,35 @@ class ImageUtils:
         The image passed in should be an RGB image with no transparency.
         """
         
+        # Using image data is faster than modifying the image itself
+        image_data = list(img.getdata())
+
         def getImageBrightness(img):
+            """
+            Estimate the brightness of an image by added the red, green, and blue channel 
+            of every pixel.
+            """
+
             brightnessLevel = 0
-        
-            # Sum the brightness of every pixel
-            for x in range(0, img.width):
-                for y in range(0, img.height):
-                    brightnessLevel += img.getpixel((x, y))[0] + img.getpixel((x, y))[1] + img.getpixel((x, y))[2]
+
+            for pixel in image_data:
+                brightnessLevel += pixel[0] + pixel[1] + pixel[2]
             
             return brightnessLevel
+        
+        def brightnessReduction(imgData, amount):
+
+            """Reduces the brightness of every pixel by a specified amount."""
+
+            for pixelIndex in range(0, len(imgData)):
+                newColor = [0, 0, 0] # this will contain the dimmed channels
+                currentPixel = imgData[pixelIndex] # current color for this pixel
+
+                for i in range(0, 3):
+                    if currentPixel[i] - amount >= 0:
+                        newColor[i] = currentPixel[i] - amount
+
+                imgData[pixelIndex] = tuple(newColor)
 
         # The amperage of one panel at full brightness
         FOUR_AMPS = 255 * 3 * 32 * 64
@@ -43,17 +63,15 @@ class ImageUtils:
         deadPixels = 0
 
         # Get the number of channels at 0
-        for x in range(0, img.width):
-            for y in range(0, img.height):
-                deadPixels += 1 if img.getpixel((x, y))[0] == 0 else 0
-                deadPixels += 1 if img.getpixel((x, y))[1] == 0 else 0
-                deadPixels += 1 if img.getpixel((x, y))[2] == 0 else 0
+        for pixel in image_data:
+            for channel in pixel:
+                deadPixels += 1 if channel == 0 else 0
         # print("dead pixels: " + str(deadPixels))
 
-        newImage = img.copy()
+        # newImage = image_data.copy()
         
         # Repeat the dimming process until the screens are dim enough
-        while (brightness := getImageBrightness(newImage) * numberOfPanels) > FOUR_AMPS / 2.1:
+        while (brightness := getImageBrightness(image_data) * numberOfPanels) > FOUR_AMPS / 2.1:
 
             # print("Reducing brightness: " + str(brightness))
 
@@ -62,20 +80,13 @@ class ImageUtils:
             if reductionAmmount == 0:
                 reductionAmmount = 1
 
-            for x in range(0, newImage.width):
-                for y in range(0, newImage.height):
-                    newColor = [0, 0, 0]
-                    currentColor = newImage.getpixel((x, y))
-                    
-                    for i in range(0, 3):
-                        if currentColor[i] - reductionAmmount >= 0:
-                            newColor[i] = currentColor[i] - reductionAmmount
-                        else:
-                            newColor[i] = 0
-                    
-                    newImage.putpixel((x, y), tuple(newColor))
-            
-        return newImage
+            brightnessReduction(image_data, reductionAmmount)
+        
+        # return an image that uses the new dimmed values
+        new_image = Image.new(img.mode, img.size)
+        new_image.putdata(image_data)
+
+        return new_image
     
 
     def duplicateScreen(img: Image.Image) -> Image.Image:
@@ -107,11 +118,3 @@ class ImageUtils:
 
         return newImage
         
-
-# Testing code  
-# img = Image.open("C:\\Users\\noahn\\Documents\\GitHub\\LED-FRC-Matrix\\LEDcontrol\\media\\png\\image.png")
-
-# img = ImageUtils.limitCurrent(img, 2)
-
-# img.show()
-# img.close()
