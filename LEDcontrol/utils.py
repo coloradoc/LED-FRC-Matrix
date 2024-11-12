@@ -1,4 +1,5 @@
 from PIL import Image, ImageOps
+from constants import MatrixConstants
 
 class ImageUtils:
 
@@ -94,10 +95,10 @@ class ImageUtils:
         Takes an image for one screen and duplicates it horizontally so
         that it will appear on both screens.
         """
-        newImage = Image.new("RGB", (img.width*2, img.height))
+        newImage = Image.new("RGB", (MatrixConstants.WIDTH*2, MatrixConstants.HEIGHT))
 
         newImage.paste(img, (0, 0))
-        newImage.paste(img, (img.width, 0))
+        newImage.paste(img, (MatrixConstants.WIDTH, 0))
 
         return newImage
     
@@ -107,14 +108,14 @@ class ImageUtils:
         Takes an image for one screen and mirrors it horizontally so
         that it will appear on both screens facing the same direction.
         """
-        newImage = Image.new("RGB", (img.width*2, img.height))
+        newImage = Image.new("RGB", (MatrixConstants.WIDTH*2, MatrixConstants.HEIGHT))
         
         if invertMirroring:
             newImage.paste(ImageOps.mirror(img), (0, 0))
-            newImage.paste(img, (img.width, 0))
+            newImage.paste(img, (MatrixConstants.WIDTH, 0))
         else:
             newImage.paste(img, (0, 0))
-            newImage.paste(ImageOps.mirror(img), (img.width, 0))
+            newImage.paste(ImageOps.mirror(img), (MatrixConstants.WIDTH, 0))
 
         return newImage
         

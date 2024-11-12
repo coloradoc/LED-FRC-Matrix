@@ -2,6 +2,7 @@ import time
 import sys
 
 from utils import ImageUtils
+from constants import MatrixConstants
 
 # from LEDcontrol.simulation.rgbmatrix import RGBMatrix, RGBMatrixOptions
 # from rgbmatrix import RGBMatrix # type: ignore
@@ -28,7 +29,7 @@ def compileGif(gif: Image.Image, matrix) -> list:
 
         newFrame = ImageUtils.duplicateScreen(
             ImageUtils.limitCurrent(
-                frame.convert("RGB"), 2
+                frame.convert("RGB"), MatrixConstants.PANEL_COUNT
             )
         )
 

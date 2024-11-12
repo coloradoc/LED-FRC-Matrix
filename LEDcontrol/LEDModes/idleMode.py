@@ -1,9 +1,7 @@
 import time
 import sys
-from constants import GifConstants
-
-# from LEDcontrol.simulation.rgbmatrix import RGBMatrix, RGBMatrixOptions
-from rgbmatrix import RGBMatrix # type: ignore
+from utils import ImageUtils
+from constants import GifConstants, MatrixConstants
 
 from PIL import Image
 from LEDModes.LEDmode import LEDmode
@@ -21,15 +19,16 @@ try:
 except Exception:
     sys.exit("provided image is not a gif")
 
+has_ran_startup = False
 
-def compileGif(gif: Image.Image, matrix: RGBMatrix) -> list:
+def compileGif(gif: Image.Image, matrix) -> list:
     """
-    Takes a gif and turns it into a list of canvases that can be 
-    displayed one after the other. Also returns the duration of the gif.
+    Takes a gif and returns a tuple containing a list of canvases that can be 
+    displayed one after the other, along with the duration of the gif.
     """
 
     canvases = []
-
+    
     # iterate over every frame in the gif
     for frame_index in range(0, gif.n_frames):
         gif.seek(frame_index)
@@ -38,32 +37,67 @@ def compileGif(gif: Image.Image, matrix: RGBMatrix) -> list:
         frame = gif.copy()
         frame.thumbnail((matrix.width, matrix.height), Image.BICUBIC)
 
+        newFrame = ImageUtils.duplicateScreen(
+            ImageUtils.limitCurrent(
+                frame.convert("RGB"), MatrixConstants.PANEL_COUNT
+            )
+        )
+
         canvas = matrix.CreateFrameCanvas()
-        canvas.SetImage(frame.convert("RGB"))
+        canvas.SetImage(newFrame)
         canvases.append(canvas)
     
-     # Note: technically in a gif, different frames can have different durations, 
-     # but I'm too lazy to change this.
+    # Note: technically in a gif, different frames can have different durations, 
+    # but I'm too lazy to change this.
     return (canvases, gif.info['duration'])
 
 
 class IdleMode(LEDmode):
     
-    def __init__(self, matrix, playStartup=False):
+    def __init__(self, matrix):
         self.matrix = matrix
-        self.playStartup = playStartup
 
-        self.gifCanvases = compileGif(StartupANI, matrix)
+        startupAnimation = Image.open(GifConstants.STARTUP)
+        idleAnimation = Image.open(GifConstants.IDLE)
+
+        self.startupCanvases = compileGif(startupAnimation, matrix)
+        self.idleCanvases = compileGif(idleAnimation, matrix)
+
+        startupAnimation.close()
+        idleAnimation.close()
+
 
     def startup(self):
+        if has_ran_startup:
+            self.currentCanvases = self.idleCanvases
+            self.currentNumFrames = Idle_num_frames
+        else:
+            self.currentCanvases = self.startupCanvases
+            self.currentNumFrames = Startup_num_frames
+
         self.cur_frame = 0
+        self.start_time = time.time()
+
+        self.matrix.SwapOnVSync(self.currentCanvases[0][0])
+
 
     def periodic(self):
+        global has_ran_startup
         # display each frame one after the other
-        num_frames = Startup_num_frames
-        self.matrix.SwapOnVSync(self.gifCanvases[0][self.cur_frame])
-        self.cur_frame = (self.cur_frame + 1) % num_frames
-        time.sleep(self.gifCanvases[1] / 1000)  
+        if ((time.time()) - self.start_time) > (self.currentCanvases[1] / 1000):
+            self.start_time = time.time() # reset timer
+
+            # if the startup animation has finished, switch to the idle animation
+            if (self.currentCanvases == self.startupCanvases) and (self.cur_frame == len(self.startupCanvases[0])-1):
+                self.cur_frame = 0
+                self.currentCanvases = self.idleCanvases
+                self.currentNumFrames = Idle_num_frames
+                has_ran_startup = True
+            else:
+                self.cur_frame = (self.cur_frame + 1) % self.currentNumFrames # increment frame counter
+            
+            self.matrix.SwapOnVSync(self.currentCanvases[0][self.cur_frame]) # go to next frame
+            
 
     def onEnd(self):
         pass
