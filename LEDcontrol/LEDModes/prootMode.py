@@ -2,10 +2,11 @@
 import time
 import sys
 import math
-from LEDcontrol.simulation.rgbmatrix import RGBMatrix
+# from LEDcontrol.simulation.rgbmatrix import RGBMatrix
 from PIL import Image, ImageFilter
 
-from LEDcontrol.LEDModes.LEDmode import LEDmode
+from LEDModes.LEDmode import LEDmode
+
 rightEye = Image.open("/home/pi/LEDcontrol/media/prootImg/rightEye.png")
 leftEye = Image.open("/home/pi/LEDcontrol/media/prootImg/leftEye.png")
 rightSmile = Image.open("/home/pi/LEDcontrol/media/prootImg/rightSmile.png")
@@ -17,6 +18,7 @@ googleLeft = Image.open("/home/pi/LEDcontrol/media/prootImg/googleLeft.png")
 googleRight = Image.open("/home/pi/LEDcontrol/media/prootImg/googleRight.png")
 blinklyLeft = Image.open("/home/pi/LEDcontrol/media/prootImg/blinklyLeft.png")
 blinklyRight = Image.open("/home/pi/LEDcontrol/media/prootImg/blinklyRight.png")
+
 class prootMode(LEDmode):
 
     def __init__(self, matrix):

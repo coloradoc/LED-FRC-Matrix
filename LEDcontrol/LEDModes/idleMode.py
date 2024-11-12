@@ -6,7 +6,7 @@ from constants import GifConstants
 from rgbmatrix import RGBMatrix # type: ignore
 
 from PIL import Image
-import LEDcontrol.LEDModes.LEDmode as LEDmode
+from LEDModes.LEDmode import LEDmode
 
 StartupANI = Image.open(GifConstants.STARTUP)
 IdleANI = Image.open(GifConstants.IDLE)

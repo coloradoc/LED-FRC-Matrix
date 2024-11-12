@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-from LEDcontrol.OldStuff.samplebase import SampleBase
-from LEDcontrol.simulation.rgbmatrix import graphics
+from samplebase import SampleBase
+from rgbmatrix import graphics #type: ignore
 import time
 
 font = graphics.Font()

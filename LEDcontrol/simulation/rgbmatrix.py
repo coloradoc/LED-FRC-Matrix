@@ -1,7 +1,6 @@
 from PIL import Image
 import pygame
 from pygame.locals import *
-import threading
 
 
 class RGBMatrixOptions:
