@@ -14,9 +14,9 @@ class GifConstants:
      
 
 class ImageConstants:
-     PATH = "/home/pi/LEDcontrol/media/"
+     PATH = "/home/pi/LEDcontrol/media/png/"
 
-     LOADING = PATH + "ui/loading.png"
+     LOADING = PATH + "loading.png"
 
 
 class NetworkTableConstants:
