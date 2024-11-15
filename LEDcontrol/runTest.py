@@ -1,10 +1,11 @@
 
-# from rgbmatrix import RGBMatrix, RGBMatrixOptions # type: ignore
-from simulation.rgbmatrix import RGBMatrix, RGBMatrixOptions
+from rgbmatrix import RGBMatrix, RGBMatrixOptions 
 import sys
 # from LEDModes.idleMode import IdleMode
 from LEDModes.runGif import GifMode
 from constants import MatrixConstants
+from constants import ImageConstants
+from constants import GifConstants
 from utils import ImageUtils
 from PIL import Image
 
@@ -23,10 +24,10 @@ if __name__ == "__main__":
 
     matrix = RGBMatrix(options = options)
 
-    with Image.open("C:\\Users\\noahn\\Documents\\GitHub\\LED-FRC-Matrix\\LEDcontrol\\media\\png\\loading.png") as loadingImage:
+    with Image.open(ImageConstants.LOADING) as loadingImage:
         matrix.SetImage(ImageUtils.duplicateScreen(loadingImage))
 
-    LED_MODE = GifMode(matrix, "C:\\Users\\noahn\\Documents\\GitHub\\LED-FRC-Matrix\\LEDcontrol\\media\\gif\\idle.gif")
+    LED_MODE = GifMode(matrix, GifConstants.IDLE)
 
     try:
         print("Press CTRL-C to stop.")

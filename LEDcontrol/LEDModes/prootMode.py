@@ -1,27 +1,26 @@
 #!/usr/bin/env python
-import time
-import sys
 import math
-# from LEDcontrol.simulation.rgbmatrix import RGBMatrix
+from rgbmatrix import RGBMatrix
 from PIL import Image, ImageFilter
+from constants import ImageConstants as IC
 
 from LEDModes.LEDmode import LEDmode
 
-rightEye = Image.open("/home/pi/LEDcontrol/media/prootImg/rightEye.png")
-leftEye = Image.open("/home/pi/LEDcontrol/media/prootImg/leftEye.png")
-rightSmile = Image.open("/home/pi/LEDcontrol/media/prootImg/rightSmile.png")
-leftSmile = Image.open("/home/pi/LEDcontrol/media/prootImg/leftSmile.png")
-nose = Image.open("/home/pi/LEDcontrol/media/prootImg/nose.png")
-faceSmall = Image.open("/home/pi/LEDcontrol/media/prootImg/faceSmall.png")
-faceNormal = Image.open("/home/pi/LEDcontrol/media/prootImg/faceNormal.png")
-googleLeft = Image.open("/home/pi/LEDcontrol/media/prootImg/googleLeft.png")
-googleRight = Image.open("/home/pi/LEDcontrol/media/prootImg/googleRight.png")
-blinklyLeft = Image.open("/home/pi/LEDcontrol/media/prootImg/blinklyLeft.png")
-blinklyRight = Image.open("/home/pi/LEDcontrol/media/prootImg/blinklyRight.png")
+rightEye = Image.open(IC.PROOT_PATH + "rightEye.png")
+leftEye = Image.open(IC.PROOT_PATH + "leftEye.png")
+rightSmile = Image.open(IC.PROOT_PATH + "rightSmile.png")
+leftSmile = Image.open(IC.PROOT_PATH + "leftSmile.png")
+nose = Image.open(IC.PROOT_PATH + "nose.png")
+faceSmall = Image.open(IC.PROOT_PATH + "faceSmall.png")
+faceNormal = Image.open(IC.PROOT_PATH + "faceNormal.png")
+googleLeft = Image.open(IC.PROOT_PATH + "googleLeft.png")
+googleRight = Image.open(IC.PROOT_PATH + "googleRight.png")
+blinklyLeft = Image.open(IC.PROOT_PATH + "blinklyLeft.png")
+blinklyRight = Image.open(IC.PROOT_PATH + "blinklyRight.png")
 
 class prootMode(LEDmode):
 
-    def __init__(self, matrix):
+    def __init__(self, matrix: RGBMatrix):
         self.matrix = matrix
 
 
@@ -100,7 +99,7 @@ class prootMode(LEDmode):
         # Background
         composite_image = Image.new("RGBA", (self.matrix.width, self.matrix.height))
         for part in parts:
-            part[0].thumbnail((self.matrix.width, self.matrix.height), Image.ANTIALIAS)
+            part[0].thumbnail((self.matrix.width, self.matrix.height), Image.BICUBIC)
             img = prootMode.rotato(part[0], part[1], part[2], part[3], part[4])
             composite_image.alpha_composite(img)
 
@@ -126,9 +125,9 @@ class prootMode(LEDmode):
 
     def periodic(self):
         if not self.directionFlip:
-            self.angleWarp += .01 
+            self.angleWarp += .0025
         else:
-            self.angleWarp -= .01
+            self.angleWarp -= .0025
         if self.angleWarp >= 2:
             self.directionFlip = True
         if self.angleWarp <= 0:

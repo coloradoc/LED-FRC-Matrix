@@ -6,7 +6,7 @@ class MatrixConstants:
 
 class GifConstants:
     # idenifies the files
-     PATH = "/home/pi/LEDcontrol/media/gif/" # <-- This might change depending on where you put it.
+     PATH = "LEDcontrol/media/gif/" # <-- This might change depending on where you put it.
 
      STARTUP = PATH + "startup.gif"
      IDLE = PATH + "idle.gif"
@@ -14,9 +14,11 @@ class GifConstants:
      
 
 class ImageConstants:
-     PATH = "/home/pi/LEDcontrol/media/png/"
+     PATH = "LEDcontrol/media/png/"
 
      LOADING = PATH + "loading.png"
+
+     PROOT_PATH = "LEDcontrol/media/prootImg/"
 
 
 class NetworkTableConstants:

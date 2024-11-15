@@ -1,5 +1,6 @@
 import time
 import sys
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from utils import ImageUtils
 from constants import GifConstants, MatrixConstants
 

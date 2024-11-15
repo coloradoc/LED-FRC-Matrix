@@ -4,11 +4,10 @@ import sys
 from utils import ImageUtils
 from constants import MatrixConstants
 
-# from LEDcontrol.simulation.rgbmatrix import RGBMatrix, RGBMatrixOptions
-# from rgbmatrix import RGBMatrix # type: ignore
+from rgbmatrix import RGBMatrix
 
 from PIL import Image
-# from LEDmode import LEDmode
+from LEDModes.LEDmode import LEDmode
 
 
 def compileGif(gif: Image.Image, matrix) -> list:
@@ -42,9 +41,9 @@ def compileGif(gif: Image.Image, matrix) -> list:
     return (canvases, gif.info['duration'])
 
 
-class GifMode():
+class GifMode(LEDmode):
     
-    def __init__(self, matrix, gifPath: str):
+    def __init__(self, matrix: RGBMatrix, gifPath: str):
         self.matrix = matrix
         animation = Image.open(gifPath)
 
