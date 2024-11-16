@@ -67,6 +67,8 @@ class IdleMode(LEDmode):
                 self.cur_frame = (self.cur_frame + 1) % self.currentNumFrames # increment frame counter
             
             self.matrix.SwapOnVSync(self.currentCanvases[0][self.cur_frame]) # go to next frame
+
+        return False
             
 
     def onEnd(self):

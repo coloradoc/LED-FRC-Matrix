@@ -25,5 +25,9 @@ class ImageConstants:
 
 
 class NetworkTableConstants:
-     TABLE_NAME = "LED Data"
-     LED_INDEX_NAME = "LED Image Index"
+     INDEX_TAB_NAME = "Index"
+     SHOOTER_TAB_NAME = "Shooter"
+
+     DPAD_INDEX_KEY = "Dpad Index"
+     IS_BALL_DETECTED_KEY = "Is Ball Detected"
+

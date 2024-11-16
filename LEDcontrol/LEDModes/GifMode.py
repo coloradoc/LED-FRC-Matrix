@@ -32,8 +32,13 @@ class GifMode(LEDmode):
         # display each frame one after the other
         if ((time.time()) - self.start_time) > (self.gifCanvases[1][self.cur_frame] / 1000):
             self.start_time = time.time() # reset timer
-            self.cur_frame = (self.cur_frame + 1) % self.num_frames # increment frame counter
+            if self.cur_frame >= self.num_frames - 1:
+                self.cur_frame = self.cur_frame + 1
+            else:
+                return True
             self.matrix.SwapOnVSync(self.gifCanvases[0][self.cur_frame]) # go to next frame
+
+        return False
 
     def onEnd(self):
         pass
