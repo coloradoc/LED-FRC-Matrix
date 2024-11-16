@@ -35,7 +35,7 @@ with Image.open(ImageConstants.LOADING) as loadingImage:
 
 # sd = NetworkTables.getTable(NetworkTableConstants.TABLE_NAME) # this may need to be moved lower to avoid errors
 
-LED_MODES = [IdleMode(matrix), GifMode(matrix, GifConstants.BoyKisser), prootMode(matrix)]
+LED_MODES = [IdleMode(matrix), GifMode(matrix, GifConstants.FeedMe), GifMode(matrix, GifConstants.BoyKisser), GifMode(matrix, GifConstants.Yipee)]
 
 led_mode = LED_MODES[0]
 

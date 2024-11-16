@@ -11,6 +11,8 @@ class GifConstants:
      STARTUP = PATH + "startup.gif"
      IDLE = PATH + "idle.gif"
      BoyKisser = PATH + "BK1.gif"
+     FeedMe = PATH + "feed me.gif"
+     Yipee = PATH + "Yipeeeeeeeeeeeeeeee.gif"
      
 
 class ImageConstants:
