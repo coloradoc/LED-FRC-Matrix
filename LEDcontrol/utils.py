@@ -67,9 +67,6 @@ class ImageUtils:
         for pixel in image_data:
             for channel in pixel:
                 deadPixels += 1 if channel == 0 else 0
-        # print("dead pixels: " + str(deadPixels))
-
-        # newImage = image_data.copy()
         
         # Repeat the dimming process until the screens are dim enough
         while (brightness := getImageBrightness(image_data) * numberOfPanels) > FOUR_AMPS / 2.1:
