@@ -3,7 +3,7 @@ import time
 
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
-# from networktables import NetworkTables
+from networktables import NetworkTables
 
 from PIL import Image
 

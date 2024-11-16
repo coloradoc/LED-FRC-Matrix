@@ -2,7 +2,6 @@ import time
 import sys
 
 from utils import ImageUtils
-from constants import MatrixConstants
 
 from rgbmatrix import RGBMatrix
 
@@ -11,7 +10,6 @@ from LEDModes.LEDmode import LEDmode
 
 
 class GifMode(LEDmode):
-    
     def __init__(self, matrix: RGBMatrix, gifPath: str):
         self.matrix = matrix
         animation = Image.open(gifPath)
