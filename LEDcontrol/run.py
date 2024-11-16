@@ -10,7 +10,7 @@ from PIL import Image
 from LEDModes import *
 from LEDModes.idleMode import IdleMode
 from LEDModes.prootMode import prootMode
-from LEDModes.runGif import GifMode
+from LEDModes.GifMode import GifMode
 from constants import NetworkTableConstants, GifConstants, ImageConstants, MatrixConstants
 from utils import ImageUtils
 

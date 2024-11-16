@@ -1,8 +1,8 @@
 
-from rgbmatrix import RGBMatrix, RGBMatrixOptions 
+from rgbmatrixsim import RGBMatrix, RGBMatrixOptions 
 import sys
 # from LEDModes.idleMode import IdleMode
-from LEDModes.runGif import GifMode
+from LEDModes.GifMode import GifMode
 from constants import MatrixConstants
 from constants import ImageConstants
 from constants import GifConstants
