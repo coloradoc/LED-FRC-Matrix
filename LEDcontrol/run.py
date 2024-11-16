@@ -1,5 +1,4 @@
 import sys
-import time
 
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
@@ -18,7 +17,6 @@ from utils import ImageUtils
 This is the main file to be ran on the raspberry pi.
 Connects to networktables and manages the LED state.
 """
-
 if __name__ == "__main__":
     options = RGBMatrixOptions()
     options.rows = MatrixConstants.HEIGHT

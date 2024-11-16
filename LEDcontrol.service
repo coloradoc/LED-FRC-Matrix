@@ -3,7 +3,7 @@ Description=Run the LEDs on startup
 After=multi-user.target
 
 [Service]
-ExecStart=/usr/bin/python3 /home/pi/LED-FRC-Matrix/LEDcontrol/run.py
+ExecStart=/bin/python /home/pi/LED-FRC-Matrix/LEDcontrol/run.py
 Type=simple
 
 [Install]
