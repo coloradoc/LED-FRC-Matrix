@@ -2,6 +2,7 @@ class MatrixConstants:
      WIDTH = 64
      HEIGHT = 32
      PANEL_COUNT = 2
+     BRIGHTNESS = 80
 
 
 class GifConstants:

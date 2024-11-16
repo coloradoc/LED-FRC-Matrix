@@ -118,4 +118,35 @@ class ImageUtils:
             newImage.paste(ImageOps.mirror(img), (MatrixConstants.WIDTH, 0))
 
         return newImage
+    
+    def compileGif(gif: Image.Image, matrix) -> list:
+        """
+        Takes a gif and returns a tuple containing a list of canvases that can be 
+        displayed one after the other, along with the duration of the gif.
+        """
+
+        canvases = []
+        durations = []
         
+        # iterate over every frame in the gif
+        for frame_index in range(0, gif.n_frames):
+            gif.seek(frame_index)
+
+            # must copy the frame out of the gif, since thumbnail() modifies the image in-place
+            frame = gif.copy()
+            frame.thumbnail((matrix.width, matrix.height), Image.BICUBIC)
+
+            durations.append(frame.info["duration"])
+
+            newFrame = ImageUtils.duplicateScreen(
+                ImageUtils.limitCurrent(
+                    frame.convert("RGB"), MatrixConstants.PANEL_COUNT
+                )
+            )
+
+            canvas = matrix.CreateFrameCanvas()
+            canvas.SetImage(newFrame)
+            canvases.append(canvas)
+        
+        return (canvases, durations)
+            
