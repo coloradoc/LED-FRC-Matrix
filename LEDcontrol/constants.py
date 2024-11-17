@@ -2,6 +2,7 @@ class MatrixConstants:
      WIDTH = 64
      HEIGHT = 32
      PANEL_COUNT = 2
+     BRIGHTNESS = 80
 
 
 class GifConstants:
@@ -11,6 +12,8 @@ class GifConstants:
      STARTUP = PATH + "startup.gif"
      IDLE = PATH + "idle.gif"
      BoyKisser = PATH + "BK1.gif"
+     FeedMe = PATH + "feed me.gif"
+     Yipee = PATH + "Yipeeeeeeeeeeeeeeee.gif"
      
 
 class ImageConstants:
@@ -22,5 +25,9 @@ class ImageConstants:
 
 
 class NetworkTableConstants:
-     TABLE_NAME = "LED Data"
-     LED_INDEX_NAME = "LED Image Index"
+     INDEX_TAB_NAME = "Index"
+     SHOOTER_TAB_NAME = "Shooter"
+
+     DPAD_INDEX_KEY = "Dpad Index"
+     IS_BALL_DETECTED_KEY = "Is Ball Detected"
+
