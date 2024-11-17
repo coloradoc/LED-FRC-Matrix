@@ -1,8 +1,8 @@
 import time
 import sys
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from rgbmatrix import RGBMatrix
 from utils import ImageUtils
-from constants import GifConstants, MatrixConstants
+from constants import GifConstants
 
 from PIL import Image
 from LEDModes.LEDmode import LEDmode
@@ -24,7 +24,7 @@ has_ran_startup = False
 
 class IdleMode(LEDmode):
     
-    def __init__(self, matrix):
+    def __init__(self, matrix: RGBMatrix):
         self.matrix = matrix
 
         startupAnimation = Image.open(GifConstants.STARTUP)

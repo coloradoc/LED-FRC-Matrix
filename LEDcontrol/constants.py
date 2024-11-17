@@ -25,9 +25,11 @@ class ImageConstants:
 
 
 class NetworkTableConstants:
-     INDEX_TAB_NAME = "Index"
-     SHOOTER_TAB_NAME = "Shooter"
+     ROBOT_IP = "192.168.211.1"
 
-     DPAD_INDEX_KEY = "Dpad Index"
+     LED_DATA_TABLE = "LED Data"
+     INDEX_TAB_NAME = "Shuffleboard/Index"
+     SHOOTER_TAB_NAME = "Shuffleboard/Shooter"
+
+     LED_INDEX_KEY = "LED Mode"
      IS_BALL_DETECTED_KEY = "Is Ball Detected"
-

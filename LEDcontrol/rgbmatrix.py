@@ -63,10 +63,11 @@ class RGBMatrix:
         pygame.display.flip()  # Update display
 
         # While we're at it let's also check for events
-        # This should really be done periodically but there's no thread-safe way to do it
+        # This should really be done periodically but there's no thread-safe way to do that
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+                raise KeyboardInterrupt()
 
 
     def CreateFrameCanvas(self) -> Canvas:

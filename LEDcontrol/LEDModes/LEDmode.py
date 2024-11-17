@@ -8,8 +8,8 @@ class LEDmode:
         pass
 
 
-    def periodic(self):
-        """ Called repeatedly by the main file. """
+    def periodic(self) -> bool:
+        """ Called repeatedly by the main file. Returns True if the mode has finished. """
         pass
 
 

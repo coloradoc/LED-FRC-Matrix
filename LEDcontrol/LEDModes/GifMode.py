@@ -10,8 +10,9 @@ from LEDModes.LEDmode import LEDmode
 
 
 class GifMode(LEDmode):
-    def __init__(self, matrix: RGBMatrix, gifPath: str):
+    def __init__(self, matrix: RGBMatrix, gifPath: str, endThyself: bool = False):
         self.matrix = matrix
+        self.endThyself = endThyself
         animation = Image.open(gifPath)
 
         try:
@@ -32,10 +33,13 @@ class GifMode(LEDmode):
         # display each frame one after the other
         if ((time.time()) - self.start_time) > (self.gifCanvases[1][self.cur_frame] / 1000):
             self.start_time = time.time() # reset timer
-            if self.cur_frame >= self.num_frames - 1:
-                self.cur_frame = self.cur_frame + 1
-            else:
+
+            # If the gif has reached its end, end the mode if endThyself is set to True
+            if (self.cur_frame >= self.num_frames - 1) and self.endThyself:
                 return True
+            else:
+                self.cur_frame = (self.cur_frame + 1) % self.num_frames
+
             self.matrix.SwapOnVSync(self.gifCanvases[0][self.cur_frame]) # go to next frame
 
         return False
