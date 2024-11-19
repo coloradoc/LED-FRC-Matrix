@@ -1,6 +1,6 @@
 import sys
 
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from LEDcontrol.rgbmatrixsim import RGBMatrix, RGBMatrixOptions
 
 from networktables import NetworkTables
 

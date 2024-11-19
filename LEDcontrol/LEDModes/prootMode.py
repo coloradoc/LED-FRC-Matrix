@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import math
-from rgbmatrix import RGBMatrix
+from LEDcontrol.rgbmatrixsim import RGBMatrix
 from PIL import Image, ImageFilter
 from constants import ImageConstants as IC
 
