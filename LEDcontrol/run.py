@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     LED_MODES = [IdleMode(matrix), GifMode(matrix, GifConstants.FeedMe, True), GifMode(matrix, GifConstants.BoyKisser, True), GifMode(matrix, GifConstants.Yipee, True)]
 
-    led_mode = LED_MODES[0]
+    led_mode = LED_MODES[1]
 
     connectionEstablished = False
 
