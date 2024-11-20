@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 WorkingDirectory=/home/pi/LED-FRC-Matrix/
-ExecStart=/bin/sudo /bin/python /home/pi/LED-FRC-Matrix/LEDcontrol/run.py
+ExecStart=git pull; /bin/sudo /bin/python /home/pi/LED-FRC-Matrix/LEDcontrol/run.py
 Restart=always
 Type=simple
 
