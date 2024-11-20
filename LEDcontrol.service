@@ -6,7 +6,6 @@ After=multi-user.target
 WorkingDirectory=/home/pi/LED-FRC-Matrix/
 ExecStart=/bin/sudo /bin/python /home/pi/LED-FRC-Matrix/LEDcontrol/run.py
 Restart=always
-Type=simple
 
 [Install]
 WantedBy=multi-user.target
