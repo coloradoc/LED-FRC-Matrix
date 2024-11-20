@@ -3,7 +3,7 @@ import sys
 
 from utils import ImageUtils
 
-from LEDcontrol.rgbmatrixsim import RGBMatrix
+from rgbmatrix import RGBMatrix
 
 from PIL import Image
 from LEDModes.LEDmode import LEDmode

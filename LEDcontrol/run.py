@@ -1,6 +1,6 @@
 import sys
 
-from LEDcontrol.rgbmatrixsim import RGBMatrix, RGBMatrixOptions
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
 from networktables import NetworkTables
 
@@ -8,7 +8,6 @@ from PIL import Image
 
 from LEDModes import *
 from LEDModes.IdleMode import IdleMode
-from LEDModes.prootMode import prootMode
 from LEDModes.GifMode import GifMode
 from constants import NetworkTableConstants as NTConstants, GifConstants, ImageConstants, MatrixConstants
 from utils import ImageUtils
@@ -72,7 +71,7 @@ if __name__ == "__main__":
             led_index = int(LEDDataTable.getNumber(NTConstants.LED_INDEX_KEY, 0))
             
             # Safety: don't attempt to use an index that doesn't exist
-            if led_index+1 > len(LED_MODES):
+            if led_index + 1 > len(LED_MODES):
                 led_index = 0
 
             # Switch LED modes if necessary

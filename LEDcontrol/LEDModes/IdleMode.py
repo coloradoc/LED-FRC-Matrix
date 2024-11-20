@@ -1,6 +1,6 @@
 import time
 import sys
-from LEDcontrol.rgbmatrixsim import RGBMatrix
+from rgbmatrix import RGBMatrix
 from utils import ImageUtils
 from constants import GifConstants
 
