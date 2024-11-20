@@ -4,7 +4,7 @@ import sys
 import os
 
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/..'))
-from LEDcontrol.rgbmatrixsim import RGBMatrix, RGBMatrixOptions #type: ignore
+from LEDcontrol.rgbmatrix import RGBMatrix, RGBMatrixOptions #type: ignore
 
 
 class SampleBase(object):

@@ -3,7 +3,7 @@ import time
 import sys
 import os 
 import glob
-from LEDcontrol.rgbmatrixsim import RGBMatrix, RGBMatrixOptions #type: ignore
+from LEDcontrol.rgbmatrix import RGBMatrix, RGBMatrixOptions #type: ignore
 from PIL import Image
 
 #setup gifs to load 
