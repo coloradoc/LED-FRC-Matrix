@@ -2,7 +2,7 @@ class MatrixConstants:
      WIDTH = 64
      HEIGHT = 32
      PANEL_COUNT = 2
-     BRIGHTNESS = 80
+     BRIGHTNESS = 70
 
 
 class GifConstants:
@@ -25,7 +25,7 @@ class ImageConstants:
 
 
 class NetworkTableConstants:
-     ROBOT_IP = "192.168.211.1"
+     ROBOT_IP = "10.3.8.2"
 
      LED_DATA_TABLE = "LED Data"
      INDEX_TAB_NAME = "Shuffleboard/Index"

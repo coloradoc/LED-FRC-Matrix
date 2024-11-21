@@ -8,7 +8,6 @@ from PIL import Image
 
 from LEDModes import *
 from LEDModes.IdleMode import IdleMode
-from LEDModes.prootMode import prootMode
 from LEDModes.GifMode import GifMode
 from constants import NetworkTableConstants as NTConstants, GifConstants, ImageConstants, MatrixConstants
 from utils import ImageUtils
@@ -42,7 +41,8 @@ if __name__ == "__main__":
 
     LED_MODES = [IdleMode(matrix), GifMode(matrix, GifConstants.FeedMe, True), GifMode(matrix, GifConstants.BoyKisser, True), GifMode(matrix, GifConstants.Yipee, True)]
 
-    led_mode = LED_MODES[0]
+    led_index = 0
+    led_mode = LED_MODES[led_index]
 
     connectionEstablished = False
 
@@ -69,10 +69,10 @@ if __name__ == "__main__":
         # Main program loop
         while True:
             # Get LED mode from networktables
-            led_index = int(LEDDataTable.getNumber(NTConstants.LED_INDEX_KEY, 0))
+            led_index = int(LEDDataTable.getNumber(NTConstants.LED_INDEX_KEY, led_index))
             
             # Safety: don't attempt to use an index that doesn't exist
-            if led_index+1 > len(LED_MODES):
+            if led_index + 1 > len(LED_MODES):
                 led_index = 0
 
             # Switch LED modes if necessary
@@ -83,7 +83,8 @@ if __name__ == "__main__":
 
             # Run periodic and switch modes if current mode has ended
             if led_mode.periodic():
-                LEDDataTable.putNumber(NTConstants.LED_INDEX_KEY, 0)
+                led_index = 0
+                LEDDataTable.putNumber(NTConstants.LED_INDEX_KEY, led_index)
 
     except KeyboardInterrupt: # For debugging purposes
         led_mode.onEnd()

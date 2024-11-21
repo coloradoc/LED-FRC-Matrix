@@ -1,5 +1,5 @@
 
-from rgbmatrix import RGBMatrix, RGBMatrixOptions 
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 import sys
 # from LEDModes.idleMode import IdleMode
 from LEDModes.GifMode import GifMode
