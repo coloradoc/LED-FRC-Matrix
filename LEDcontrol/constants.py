@@ -14,6 +14,7 @@ class GifConstants:
      BoyKisser = PATH + "BK1.gif"
      FeedMe = PATH + "feed me.gif"
      Yipee = PATH + "Yipeeeeeeeeeeeeeeee.gif"
+     Yummy = PATH + "yummy.gif"
      
 
 class ImageConstants:
@@ -24,7 +25,7 @@ class ImageConstants:
      PROOT_PATH = "LEDcontrol/media/prootImg/"
 
 
-class NetworkTableConstants:
+class NetworkTablesConstants:
      ROBOT_IP = "10.3.8.2"
 
      LED_DATA_TABLE = "LED Data"
