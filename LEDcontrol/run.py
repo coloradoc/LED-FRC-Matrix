@@ -9,7 +9,7 @@ from PIL import Image
 from LEDModes import *
 from LEDModes.IdleMode import IdleMode
 from LEDModes.GifMode import GifMode
-from constants import NetworkTableConstants as NTConstants, GifConstants, ImageConstants, MatrixConstants
+from constants import NetworkTablesConstants as NTConstants, GifConstants, ImageConstants, MatrixConstants
 from utils import ImageUtils
 
 """
@@ -35,11 +35,11 @@ if __name__ == "__main__":
     # Initialize networktables
     NetworkTables.initialize(server=NTConstants.ROBOT_IP)
 
-    LEDDataTable = NetworkTables.getTable(NTConstants.LED_DATA_TABLE) # this may need to be moved lower to avoid errors
+    LEDDataTable = NetworkTables.getTable(NTConstants.LED_DATA_TABLE)
     indexTab = NetworkTables.getTable(NTConstants.INDEX_TAB_NAME)
     shooterTab = NetworkTables.getTable(NTConstants.SHOOTER_TAB_NAME)
 
-    LED_MODES = [IdleMode(matrix), GifMode(matrix, GifConstants.FeedMe, True), GifMode(matrix, GifConstants.BoyKisser, True), GifMode(matrix, GifConstants.Yipee, True)]
+    LED_MODES = [IdleMode(matrix), GifMode(matrix, GifConstants.FeedMe), GifMode(matrix, GifConstants.BoyKisser), GifMode(matrix, GifConstants.Yipee), GifMode(matrix, GifConstants.Yummy)]
 
     led_index = 0
     led_mode = LED_MODES[led_index]
@@ -58,6 +58,14 @@ if __name__ == "__main__":
 
     # Detects when we connect/disconnect from robot.
     NetworkTables.addConnectionListener(connectionListener, immediateNotify=True)
+
+    def ballDetectedListener(source, key, value, inNew):
+        global led_index
+
+        if value == True:
+            led_index = 4
+        
+    indexTab.addEntryListener(ballDetectedListener, key=NTConstants.IS_BALL_DETECTED_KEY)
 
     # use try statement so the code can be ended via keypress
     # for testing purposes
